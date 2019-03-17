@@ -1,0 +1,11 @@
+{
+  "name": "darcho",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node ./server/start.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "http-proxy-middleware": "^0.19.1"
+  }
+}

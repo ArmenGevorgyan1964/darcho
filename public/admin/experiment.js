@@ -271,7 +271,7 @@ function highlight(strToFind, strBodyLarge, className="highlighted"){
 }
 // searcing document by parameters:
 async function getDoc(parkk, kapp, papk, docnum){
-  const response = await fetch("http://elastic/darch/_doc/_search", 
+  const response = await fetch("http://127.0.0.1:9200/darch/_doc/_search", 
   {
   headers: {
     'Accept': 'application/json',
@@ -321,7 +321,7 @@ async function getDoc(parkk, kapp, papk, docnum){
 }
 // searcing document by parameters:
 async function getDocQstring(querystring){
-  const response = await fetch("http://elastic/darch/_doc/_search", 
+  const response = await fetch("http://127.0.0.1:9200/darch/_doc/_search", 
   {
     headers: {
       'Accept': 'application/json',
@@ -381,7 +381,7 @@ if(park =="" ||   kap =="" ||   papka == "" ||   documentNum == "" || title ==""
    return;
 }
 // getting last document Number with same park.kap, papka id
-const response = await fetch("http://elastic/darch/_doc/_search", 
+const response = await fetch("http://127.0.0.1:9200/darch/_doc/_search", 
 {
   headers: {
     'Accept': 'application/json',
@@ -438,7 +438,7 @@ if(json.hits.total>0){
 // inserting new document
 // let doc_num = ++max_num;
 console.log("inserting");
-const response1 = await fetch("http://elastic/darch/_doc/", 
+const response1 = await fetch("http://127.0.0.1:9200/darch/_doc/", 
   {
       body: JSON.stringify(docObj),
       // must match 'Content-Type' header
@@ -463,7 +463,7 @@ if(last_id){
 //
 //
 async function getAllDocs(){
-let res = await fetch("http://elastic/darch/_doc/_search", {
+let res = await fetch("http://127.0.0.1:9200/darch/_doc/_search", {
   headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -638,7 +638,7 @@ class DropDownClass extends InputField{
   }  // end of constructor
 // function to get all users : id, name
   async  getAllUserIDsNames(){
-    let res = await fetch("http://elastic/users/_doc/_search", {
+    let res = await fetch("http://127.0.0.1:9200/users/_doc/_search", {
       headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -1521,7 +1521,7 @@ async function saveChangedUser(user_id, usr) {
   }
   console.info("1360. user id == : "+id);
   // checking if any user with the same login and password allready registered
-  const resp_check = await fetch("http://elastic/users/_doc/_search", {
+  const resp_check = await fetch("http://127.0.0.1:9200/users/_doc/_search", {
       headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -1559,7 +1559,7 @@ async function saveChangedUser(user_id, usr) {
     // updating user
     //let user_id = ++max_id;
     console.log("updating");
-    const response1 = await fetch("http://elastic/users/_doc/"+id, 
+    const response1 = await fetch("http://127.0.0.1:9200/users/_doc/"+id, 
     {
         body: JSON.stringify(usr),
         // must match 'Content-Type' header
@@ -1616,7 +1616,7 @@ async function saveUser(usr) {
           return;
   }
   // getting last user id
-  const response = await fetch("http://elastic/users/_doc/_search", 
+  const response = await fetch("http://127.0.0.1:9200/users/_doc/_search",
   {
     headers: {
       'Accept': 'application/json',
@@ -1651,7 +1651,7 @@ async function saveUser(usr) {
   //console.info(json);
   console.info("161. max _id == : "+max_id);
   // checking if any user with the same login and password allready registered
-  const resp_check = await fetch("http://elastic/users/_doc/_search", {
+  const resp_check = await fetch("http://127.0.0.1:9200/users/_doc/_search", {
       headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -1688,7 +1688,7 @@ async function saveUser(usr) {
     // inserting new user
     let user_id = ++max_id;
     console.log("inserting");
-    const response1 = await fetch("http://elastic/users/_doc/"+user_id, 
+    const response1 = await fetch("http://127.0.0.1:9200/users/_doc/"+user_id, 
     {
         body: JSON.stringify(usr),
         // must match 'Content-Type' header
@@ -1718,7 +1718,7 @@ async function saveUser(usr) {
 }
 //
 async function getAllUsers(){
-  let res = await fetch("http://elastic/users/_doc/_search", {
+  let res = await fetch("http://127.0.0.1:9200/users/_doc/_search", {
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -1827,7 +1827,7 @@ async function checkUserData(aSavedData){
     alert("checkUserData(aSavedData) function parameter error");
     return;
   }
-  const response = await fetch("http://elastic/users/_doc/_search?q=login:"+lgn, 
+  const response = await fetch("http://127.0.0.1:9200/users/_doc/_search?q=login:"+lgn, 
   {
       method: 'POST',
       headers: {
@@ -1892,7 +1892,7 @@ async function searchUser(userLogin, userPassw) {
       alert("searchUser(userLogin. userPassw) function parameter error");
       return;
   }
-  const response = await fetch("http://elastic/users/_doc/_search?q=login:"+userLogin, 
+  const response = await fetch("http://127.0.0.1:9200/users/_doc/_search?q=login:"+userLogin, 
   {
       method: 'POST',
       headers: {
@@ -1925,7 +1925,7 @@ async function searchUser(userLogin, userPassw) {
 }
 //
 async function searchUserMaxId() {
-  const response = await fetch("http://elastic/users/_doc/_search", 
+  const response = await fetch("http://127.0.0.1:9200/users/_doc/_search", 
   {
     headers: {
       'Accept': 'application/json',
@@ -2439,7 +2439,7 @@ Button.prototype.editUserFunc = async function(){
   // 1. getting old data by id
   if(this.deletableUserID){
     alert(this.deletableUserID);  // OK
-    const response = await fetch("http://elastic/users/_doc/"+this.deletableUserID);
+    const response = await fetch("http://127.0.0.1:9200/users/_doc/"+this.deletableUserID);
     const jsonedit = await response.json();
     //const json = response.json();
     let editObj = await {
@@ -2480,7 +2480,7 @@ Button.prototype.deleteUserFunc = async function(){
     alert("No ID TO DELETE");
     return;
   }
-  const response = await fetch("http://elastic/users/_doc/_delete_by_query", 
+  const response = await fetch("http://127.0.0.1:9200/users/_doc/_delete_by_query", 
     {
     headers: {
       'Accept': 'application/json',
@@ -2653,7 +2653,7 @@ Button.prototype.saveOneDoc = async function(docObj){
        return;
     }
     // getting last document Number with same park.kap, papka id
-    const response = await fetch("http://elastic/darch/_doc/_search", 
+    const response = await fetch("http://127.0.0.1:9200/darch/_doc/_search", 
     {
       headers: {
         'Accept': 'application/json',
@@ -2713,7 +2713,7 @@ Button.prototype.saveOneDoc = async function(docObj){
     // inserting new document
     // let doc_num = ++max_num;
     console.log("inserting");
-    const response1 = await fetch("http://elastic/darch/_doc/", 
+    const response1 = await fetch("http://127.0.0.1:9200/darch/_doc/", 
       {
           body: JSON.stringify(docObj),
           // must match 'Content-Type' header
@@ -2952,7 +2952,7 @@ Button.prototype.manageLaregeText = async function(){
          console.info(this.aObjToInsert[kk]);
          // checking uniqueness
             // getting last document Number with same park.kap, papka id
-            const response = await fetch("http://elastic/darch/_doc/_search", 
+            const response = await fetch("http://127.0.0.1:9200/darch/_doc/_search", 
             {
               headers: {
                 'Accept': 'application/json',
@@ -3010,7 +3010,7 @@ Button.prototype.manageLaregeText = async function(){
               // inserting new document
               // let doc_num = ++max_num;
               console.log("inserting");
-              const response1 = await fetch("http://elastic/darch/_doc/", 
+              const response1 = await fetch("http://127.0.0.1:9200/darch/_doc/", 
                 {
                     body: JSON.stringify(this.aObjToInsert[kk]),
                     // must match 'Content-Type' header
@@ -3152,7 +3152,7 @@ SignUpContainer.hidediv();
 // Function to make Edit User Container ************************************************  Making Sign up Container 
 async function makeUserEditForm(user_id, EditUserDiv_id, EditUserDivClass){
   let statuses = newUserOptionValues; // global var
-  let res = await fetch("http://elastic/users/_doc/"+user_id);
+  let res = await fetch("http://127.0.0.1:9200/users/_doc/"+user_id);
   let json = await res.json();
   //alert("found by ID: "+json.hits.total);
  // console.info(json.hits.total)
